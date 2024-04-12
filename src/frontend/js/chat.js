@@ -14,6 +14,7 @@ const locationButton = document.getElementById('location-btn');
 const joinButton = document.getElementById('join-btn');
 const channelsContainer = document.getElementById('channels-container');
 const channels = document.getElementById('channels');
+const disconnectButton = document.getElementById('disconnect-btn');
 
 // Join room
 joinButton.addEventListener('click', (e) => {
@@ -25,6 +26,14 @@ joinButton.addEventListener('click', (e) => {
     roomForm.style.display = 'none';
     chatRoom.style.display = 'block';
     channelsContainer.style.display = 'block';
+
+    // Disconnect
+    disconnectButton.addEventListener('click', () => {
+        console.log('disconnect');
+        socket.emit('exit-chat', username);
+        socket.disconnect();
+        location.reload();
+    });
 });
 
 // Send message
@@ -52,6 +61,8 @@ locationButton.addEventListener('click', () => {
         alert('Unable to fetch location');
     });
 });
+
+
 
 // Listen for messages
 socket.on('message', message => {

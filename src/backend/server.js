@@ -63,11 +63,12 @@ io.on('connection', (socket) => {
         });
     
         // Disconnect
-        socket.on('disconnect', () => {
-            console.log('A user disconnected');
+        socket.on('exit-chat', (username) => {
+            console.log(`${username} disconnected`);
     
+            // Remove user from every room and update user list
             Object.keys(rooms).forEach(room => {
-                rooms[room] = rooms[room].filter(user => user !== socket.username);
+                rooms[room] = rooms[room].filter(user => user !== username);
                 io.to(room).emit('roomUsers', rooms[room]);
             });
         });
