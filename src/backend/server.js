@@ -61,6 +61,10 @@ io.on('connection', (socket) => {
         socket.on('sendLocation', (room, location) => {
             io.to(room).emit('location', location);
         });
+
+        socket.on('sendImage', (room, image) => {
+            io.to(room).emit('image', image);
+        });
     
         // Disconnect
         socket.on('exit-chat', (username) => {
