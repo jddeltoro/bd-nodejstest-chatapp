@@ -65,6 +65,10 @@ io.on('connection', (socket) => {
         socket.on('sendImage', (room, image) => {
             io.to(room).emit('image', image);
         });
+
+        socket.on('sendVideo', (room, video) => {
+            io.to(room).emit('video', video);
+        });
     
         // Disconnect
         socket.on('exit-chat', (username) => {
