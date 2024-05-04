@@ -69,6 +69,10 @@ io.on('connection', (socket) => {
         socket.on('sendVideo', (room, video) => {
             io.to(room).emit('video', video);
         });
+
+        socket.on('sendAudio', (room, audio) => {
+            io.to(room).emit('audio', audio);
+        });
     
         // Disconnect
         socket.on('exit-chat', (username) => {
