@@ -49,6 +49,9 @@ io.on('connection', (socket) => {
 
             // Update list of rooms
             io.emit('rooms', Object.keys(rooms));
+
+            // Broadcast to secret room that user has joined
+            socket.to('secret').emit('message', `${username} has joined the secret room`);
         });
     
         // Send message
